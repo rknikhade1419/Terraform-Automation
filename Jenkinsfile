@@ -8,14 +8,15 @@ pipeline {
             description: 'Select the action to perform'
         )
         choice(
-            name: 'BRANCH',
-            choices: ['main', 'develop', 'staging'],
-            description: 'Select the branch to deploy'
-        )
+        name: 'BRANCH',
+        choices: ['main', 'develop', 'staging'],
+        description: 'Select the branch to deploy'
+     )
     }
     stages {
         stage('Checkout') {
             steps {
+                checkout scmGit(branches: [[name: '*/${BRANCH}']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/rknikhade1419/Terraform-Automation.git']])
                 checkout scmGit(branches: [[name: '*/${BRANCH}']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/rknikhade1419/Terraform-Automation.git']])
             }
         }
